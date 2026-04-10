@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Anandwan Health Companion</title>
+
+<style>
+body {
+  font-family: Arial;
+  margin: 0;
+  text-align: center;
+  color: white;
+  transition: background 0.5s ease;
+}
+
+/* OVERLAY */
+.overlay {
+  background: rgba(0,0,0,0.65);
+  min-height: 100vh;
+  padding: 20px;
+}
+
+/* HEADER */
+header {
+  font-size: 24px;
+  padding: 15px;
+}
+
+/* CARD (TRANSPARENT) */
+.card {
+  padding: 15px;
+  margin: 15px auto;
+  width: 70%;
+  cursor: pointer;
+}
+
+/* BUTTON SMALLER */
+button {
+  width: 40%;
+  padding: 8px;
+  margin: 8px;
+  font-size: 16.5px;
+  border-radius: 10px;
+  border: none;
+  background: #ee0255;
+  color: white;
+  cursor: pointer;
+}
+
+.back {
+  background: gray;
+}
+
+/* IMAGE */
+img {
+  width: 80px;
+  margin-bottom: 10px;
+}
+
+/* TEXT BOX COMPACT */
+.info {
+  background: rgba(0,0,0,0.5);
+  padding: 10px;
+  border-radius: 8px;
+  margin-top: 8px;
+  font-size: 16px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="overlay">
+  <header> Anandwan Health Companion</header>
+  <div id="app"></div>
+</div>
+
+<script>
+
+// BACKGROUND
+function setBackground(type) {
+  if(type === "home") {
+    document.body.style.background =
+      "url('https://images.unsplash.com/photo-1508780709619-79562169bc64') no-repeat center/cover";
+  }
+  if(type === "tb") {
+    document.body.style.background =
+      "url('https://images.unsplash.com/photo-1582719478250-c89cae4dc85b') no-repeat center/cover";
+  }
+  if(type === "diabetes") {
+    document.body.style.background =
+      "url('https://images.unsplash.com/photo-1490818387583-1baba5e638af') no-repeat center/cover";
+  }
+  if(type === "leprosy") {
+    document.body.style.background =
+      "url('https://images.unsplash.com/photo-1584515933487-779824d29309') no-repeat center/cover";
+  }
+}
+
+// VOICE + TEXT
+function speakAndShow(text) {
+  document.getElementById("voiceText").innerText = text;
+  let speech = new SpeechSynthesisUtterance(text);
+  speech.lang = "hi-IN";
+  speechSynthesis.speak(speech);
+}
+
+// HOME
+function home() {
+  setBackground("home");
+
+  document.getElementById("app").innerHTML = `
+    <div class="card" onclick="tb()">
+      <img src="https://img.icons8.com/color/96/lungs.png">
+      <h2>TB Care</h2>
+    </div>
+
+    <div class="card" onclick="diabetes()">
+      <img src="https://img.icons8.com/color/96/sugar-cube.png">
+      <h2>Diabetes</h2>
+    </div>
+
+    <div class="card" onclick="leprosy()">
+      <img src="https://img.icons8.com/color/96/hand.png">
+      <h2>Leprosy Care</h2>
+    </div>
+
+    <div class="card" onclick="healthGuidance()">
+      <img src="https://img.icons8.com/color/96/heart-health.png">
+      <h2>Health Guidance</h2>
+    </div>
+
+    <p id="voiceText"></p>
+  `;
+}
+
+// TB PAGE
+function tb() {
+  setBackground("tb");
+
+  document.getElementById("app").innerHTML = `
+    <div class="card">
+      <h2>🫁 TB Care</h2>
+      <img src="https://img.icons8.com/color/96/pill.png">
+
+      <div class="info">
+        <h3>Symptoms (लक्षण)</h3>
+        <p>खांसी, बुखार, वजन कम होना</p>
+      </div>
+
+      <div class="info">
+        <h3>Solution (उपाय)</h3>
+        <p>दवा रोज लें, डॉक्टर से मिलें</p>
+      </div>
+
+      <button onclick="speakAndShow('टीबी के लक्षण हैं खांसी, बुखार और वजन कम होना')">🔊 लक्षण सुनें</button>
+      <button onclick="speakAndShow('दवा रोज लेना जरूरी है और डॉक्टर से मिलना चाहिए')">🔊 उपाय सुनें</button>
+
+      <p id="voiceText"></p>
+      <button class="back" onclick="home()">⬅ Back</button>
+    </div>
+  `;
+}
+
+// DIABETES
+function diabetes() {
+  setBackground("diabetes");
+
+  document.getElementById("app").innerHTML = `
+    <div class="card">
+      <h2>🍬 Diabetes</h2>
+      <img src="https://img.icons8.com/color/96/vegetarian-food.png">
+
+      <div class="info">
+        <h3>Symptoms (लक्षण)</h3>
+        <p>ज्यादा प्यास, बार-बार पेशाब, थकान</p>
+      </div>
+
+      <div class="info">
+        <h3>Solution (उपाय)</h3>
+        <p>कम चीनी खाएं, रोज चलें</p>
+      </div>
+
+      <button onclick="speakAndShow('डायबिटीज के लक्षण हैं ज्यादा प्यास और थकान')">🔊 लक्षण सुनें</button>
+      <button onclick="speakAndShow('कम चीनी खाएं और रोज चलना जरूरी है')">🔊 उपाय सुनें</button>
+
+      <p id="voiceText"></p>
+      <button class="back" onclick="home()">⬅ Back</button>
+    </div>
+  `;
+}
+
+// LEPROSY
+function leprosy() {
+  setBackground("leprosy");
+
+  document.getElementById("app").innerHTML = `
+    <div class="card">
+      <h2>🧴 Leprosy Care</h2>
+      <img src="https://img.icons8.com/color/96/soap.png">
+
+      <div class="info">
+        <h3>Symptoms (लक्षण)</h3>
+        <p>त्वचा पर दाग, सुन्नपन</p>
+      </div>
+
+      <div class="info">
+        <h3>Solution (उपाय)</h3>
+        <p>घाव साफ रखें, डॉक्टर को दिखाएं</p>
+      </div>
+
+      <button onclick="speakAndShow('कुष्ठ रोग में त्वचा पर दाग और सुन्नपन होता है')">🔊 लक्षण सुनें</button>
+      <button onclick="speakAndShow('घाव साफ रखें और डॉक्टर को दिखाएं')">🔊 उपाय सुनें</button>
+
+      <p id="voiceText"></p>
+      <button class="back" onclick="home()">⬅ Back</button>
+    </div>
+  `;
+}
+
+// HEALTH GUIDANCE
+function healthGuidance() {
+  setBackground("home"); // reuse home background
+
+  document.getElementById("app").innerHTML = `
+    <div class="card">
+      <h2>✅ Health Guidance</h2>
+      <div class="info">
+        <p>✅ रोज सुबह चलें या व्यायाम करें</p>
+        <p>✅ संतुलित आहार लें (सब्जी, फल, दाल)</p>
+        <p>✅ साफ-सफाई रखें और हाथ धोएं</p>
+        <p>✅ पर्याप्त नींद लें</p>
+        <p>✅ धूम्रपान और शराब से दूर रहें</p>
+      </div>
+
+      <button onclick="speakAndShow('स्वस्थ रहने के लिए रोज व्यायाम करें, संतुलित आहार लें, साफ-सफाई रखें और पर्याप्त नींद लें,धूम्रपान और शराब से दूर रहें')">
+        🔊 सुनें
+      </button>
+
+      <p id="voiceText"></p>
+      <button class="back" onclick="home()">⬅ Back</button>
+    </div>
+  `;
+}
+
+// START
+home();
+
+</script>
+
+</body>
+</html>
